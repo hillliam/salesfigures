@@ -17,10 +17,10 @@ module Offers (
 ) where
 
 
-data Offers = Offers
-    { discount :: String
-    , code     :: String
-    , start    :: Date
-    , end      :: Date
-    , cost     :: Integer
-    } deriving (Show)
+--data Offers = Offers
+--    { discount :: String
+--    , code     :: String
+--    , start    :: Date
+--    , end      :: Date
+--    , cost     :: Integer
+--    } deriving (Show)

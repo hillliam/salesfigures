@@ -16,14 +16,14 @@ module Orders (
 
 ) where
 
-data Orders = Orders
-    { id    :: String
-    , lines :: Lines
-    } deriving (Show)
+--data Orders = Orders
+--    { id    :: String
+--    , lines :: Lines
+--    } deriving (Show)
 
-data Lines = Lines
-    { description   :: String
-    , price         :: Lines
-    } deriving (Show)
+--data Lines = Lines
+--    { description   :: String
+--    , price         :: Lines
+--    } deriving (Show)
 
 
