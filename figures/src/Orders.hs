@@ -12,9 +12,7 @@
 --
 -----------------------------------------------------------------------------
 
-module Orders (
-
-) where
+module Orders where
 
 --data Orders = Orders
 --    { id    :: String

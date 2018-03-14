@@ -12,10 +12,9 @@
 --
 -----------------------------------------------------------------------------
 
-module Offers (
+module Offers where
 
-) where
-
+import JSONParser_solution
 
 --data Offers = Offers
 --    { discount :: String
@@ -24,3 +23,5 @@ module Offers (
 --    , end      :: Date
 --    , cost     :: Integer
 --    } deriving (Show)
+
+
