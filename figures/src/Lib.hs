@@ -19,19 +19,21 @@ getdiscounts :: JValue -> [String]
 getdiscounts (JArray item) =  map getdiscount item
 
 getdiscount :: JValue -> String
-getdiscount (JObject item) = undefined
+getdiscount (JObject item) = if item.1 == "discount" then
+item.2
+else ""
 --getdiscount (JObject item) = do
 --  let value = [v | (_, JString v) <- item, _ == "discount"]
 
 
 readproducts :: IO ()
 readproducts = do
-      input <- readFile "offers.json"
+      input <- readFile "products.json"
       let output = read input
       putStrLn (show (output:: JValue))
 
 readorders :: IO ()
 readorders = do
-      input <- readFile "offers.json"
+      input <- readFile "orders.json"
       let output = read input
       putStrLn (show (output:: JValue))

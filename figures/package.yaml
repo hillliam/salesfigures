@@ -20,7 +20,7 @@ extra-source-files:
 description:         Please see the README on Github at <https://github.com/githubuser/figures#readme>
 
 dependencies:
-- Lens >= 4.16
+- lens >= 4.15
 - base >= 4.7 && < 5
 
 library:
