@@ -21,6 +21,8 @@ description:         Please see the README on Github at <https://github.com/gith
 
 dependencies:
 - Spock >= 0.11
+- mtl
+- text
 - lens >= 4.15
 - base >= 4.7 && < 5
 
