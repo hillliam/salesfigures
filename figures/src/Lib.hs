@@ -13,6 +13,7 @@ readoffers :: IO ()
 readoffers =  do
       input <- readFile "offers.json"
       let output = read input
+      --output:: JValue
       putStrLn (show (output:: JValue))
       --putStrLn (head (getdiscounts output))
 
@@ -36,6 +37,11 @@ readproducts = do
       input <- readFile "products.json"
       let output = read input
       putStrLn (show (output:: JValue))
+
+getproducts :: IO () -> String
+getproducts = do
+      let output = read (readFile "products.json")
+      show (output:: JValue)
 
 readorders :: IO ()
 readorders = do
