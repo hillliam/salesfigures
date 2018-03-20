@@ -2,6 +2,9 @@ module Lib where
 
 import JSONParser_solution
 import Control.Lens
+import Offers
+import Orders
+import Products
 
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"
@@ -10,8 +13,8 @@ readoffers :: IO ()
 readoffers =  do
       input <- readFile "offers.json"
       let output = read input
-      --putStrLn (show (output:: JValue))
-      putStrLn (head (getdiscounts output))
+      putStrLn (show (output:: JValue))
+      --putStrLn (head (getdiscounts output))
 
 
 getdiscounts :: JValue -> [String]

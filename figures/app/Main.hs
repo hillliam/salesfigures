@@ -24,7 +24,23 @@ app :: SpockM () MySession MyAppState ()
 app =
     do get root $
            text "Hello World!"
-       get ("hello" <//> var) $ \name ->
+-- handle offers
+       get "offers" $
            do (DummyAppState ref) <- getState
               visitorNumber <- liftIO $ atomicModifyIORef' ref $ \i -> (i+1, i+1)
-              text ("Hello " <> name <> ", you are visitor number " <> T.pack (show visitorNumber))
+              text ("displaying all offers " <> " \n" <> readoffers)
+-- handle single offer
+       get ("offers" <//> var) $ \name ->
+           do (DummyAppState ref) <- getState
+              visitorNumber <- liftIO $ atomicModifyIORef' ref $ \i -> (i+1, i+1)
+              text ("displaying offer with name: " <> name <> " \n" <> T.pack (show visitorNumber))
+-- handle orders
+       get "orders" $
+           do (DummyAppState ref) <- getState
+              visitorNumber <- liftIO $ atomicModifyIORef' ref $ \i -> (i+1, i+1)
+              text ("displaying all orders " <> )
+-- handle single order
+       get ("orders" <//> var) $ \name ->
+           do (DummyAppState ref) <- getState
+              visitorNumber <- liftIO $ atomicModifyIORef' ref $ \i -> (i+1, i+1)
+              text ("displaying offer with name: " <> name <> " \n" <> T.pack (show visitorNumber))
