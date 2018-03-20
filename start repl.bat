@@ -1,0 +1,2 @@
+cd figures
+stack ghci
