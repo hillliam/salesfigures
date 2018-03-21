@@ -2,6 +2,7 @@
 module Main where
 
 import Web.Spock
+--import qualified Web.Spock.Action as SA
 import Web.Spock.Config
 
 import Control.Monad.Trans
@@ -27,7 +28,7 @@ main =
 app :: SpockM () MySession MyAppState ()
 app =
     do get root $
-           text "Hello World!"
+           html (T.pack (totext gentest))
 -- handle offers
        get "offers" $
            do (DummyAppState ref) <- getState

@@ -1,63 +1,84 @@
-name: figures
-version: 0.1.0.0
-cabal-version: >=1.10
-build-type: Simple
-license: BSD3
-license-file: LICENSE
-copyright: 2018 Author name here
-maintainer: example@example.com
-homepage: https://github.com/githubuser/figures#readme
-bug-reports: https://github.com/githubuser/figures/issues
-description:
-    Please see the README on Github at <https://github.com/githubuser/figures#readme>
-author: Author name here
+-- This file has been generated from package.yaml by hpack version 0.20.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 183e71ff4ce6c538e88a13e9cf4919510e4096940beadfda7a4d860d09271994
+
+name:           figures
+version:        0.1.0.0
+description:    Please see the README on Github at <https://github.com/githubuser/figures#readme>
+homepage:       https://github.com/githubuser/figures#readme
+bug-reports:    https://github.com/githubuser/figures/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2018 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
 extra-source-files:
     ChangeLog.md
     README.md
 
 source-repository head
-    type: git
-    location: https://github.com/githubuser/figures
+  type: git
+  location: https://github.com/githubuser/figures
 
 library
-    exposed-modules:
-        Htmlgen
-        JSONLexer
-        JSONParser_solution
-        Lib
-        Offers
-        Orders
-        ParserCombinators
-        Products
-    build-depends:
-        Spock >=0.11,
-        base >=4.7 && <5,
-        blaze-html -any,
-        lens >=4.15,
-        mtl -any,
-        text -any
-    default-language: Haskell2010
-    hs-source-dirs: src
-    other-modules:
-        Paths_figures
+  hs-source-dirs:
+      src
+  build-depends:
+      Spock >=0.11
+    , base >=4.7 && <5
+    , blaze-html
+    , lens >=4.15
+    , mtl
+    , text
+  exposed-modules:
+      Htmlgen
+      JSONLexer
+      JSONParser_solution
+      Lib
+      Offers
+      Orders
+      ParserCombinators
+      Products
+  other-modules:
+      Paths_figures
+  default-language: Haskell2010
 
-executable  figures-exe
-    main-is: Main.hs
+executable figures-exe
+  main-is: Main.hs
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      Spock >=0.11
+    , base >=4.7 && <5
+    , blaze-html
+    , figures
+    , lens >=4.15
+    , mtl
+    , text
+  other-modules:
+      Paths_figures
+  default-language: Haskell2010
 
-test-suite  figures-test
-    type: exitcode-stdio-1.0
-    main-is: Spec.hs
-    build-depends:
-        Spock >=0.11,
-        base >=4.7 && <5,
-        blaze-html -any,
-        figures -any,
-        lens >=4.15,
-        mtl -any,
-        text -any
-    default-language: Haskell2010
-    hs-source-dirs: test
-    other-modules:
-        Htmlgen
-        Paths_figures
-    ghc-options: -threaded -rtsopts -with-rtsopts=-N
+test-suite figures-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      Spock >=0.11
+    , base >=4.7 && <5
+    , blaze-html
+    , figures
+    , lens >=4.15
+    , mtl
+    , text
+  other-modules:
+      Paths_figures
+  default-language: Haskell2010
