@@ -14,6 +14,22 @@
 
 module Orders where
 
+import JSONParser_solution
+-- id key
+-- lines product + quantity
+--
+
+-- use
+
+-- shipments
+--
+
+-- purchase-order
+
+
+-- discounts
+-- optional not needed
+
 --data Orders = Orders
 --    { id    :: String
 --    , lines :: Lines

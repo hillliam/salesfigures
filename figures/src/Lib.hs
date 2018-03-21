@@ -14,8 +14,8 @@ readoffers =  do
       input <- readFile "offers.json"
       let output = read input
       --output:: JValue
-      putStrLn (show (output:: JValue))
-      --putStrLn (head (getdiscounts output))
+      --putStrLn (show (output:: JValue))
+      putStrLn (unwords (getdiscounts output))
 
 
 getdiscounts :: JValue -> [String]
@@ -32,19 +32,21 @@ getdiscount (JObject item) = do
   unlines value
 
 
-readproducts :: IO ()
-readproducts = do
-      input <- readFile "products.json"
-      let output = read input
-      putStrLn (show (output:: JValue))
 
-getproducts :: IO () -> String
-getproducts = do
-      let output = read (readFile "products.json")
-      show (output:: JValue)
+parseproducts :: JValue -> [String]
+parseproducts (JArray item) =  map getdiscount item
+--readproductsfile :: IO () -> String
+--readproductsfile = do
+--    (readFile "products.json") >>= filedata
+
+--getproducts :: String -> String
+--getproducts =
+--      let output = read readproductsfile
+--      show (output:: JValue)
 
 readorders :: IO ()
 readorders = do
       input <- readFile "orders.json"
       let output = read input
       putStrLn (show (output:: JValue))
+

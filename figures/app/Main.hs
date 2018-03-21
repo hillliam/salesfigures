@@ -10,9 +10,13 @@ import Data.IORef
 import qualified Data.Text as T
 
 import Lib
+import Htmlgen
 
 data MySession = EmptySession
 data MyAppState = DummyAppState (IORef Int)
+--data products = readproducts
+--data offers = readoffers
+--data orders = readorders
 
 main :: IO ()
 main =
@@ -27,20 +31,21 @@ app =
 -- handle offers
        get "offers" $
            do (DummyAppState ref) <- getState
-              visitorNumber <- liftIO $ atomicModifyIORef' ref $ \i -> (i+1, i+1)
-              text ("displaying all offers " <> " \n" <> readoffers)
+              text ("displaying all offers " <> " \n" )
 -- handle single offer
        get ("offers" <//> var) $ \name ->
            do (DummyAppState ref) <- getState
-              visitorNumber <- liftIO $ atomicModifyIORef' ref $ \i -> (i+1, i+1)
-              text ("displaying offer with name: " <> name <> " \n" <> T.pack (show visitorNumber))
+              text ("displaying offer with name: " <> name <> " \n" )
 -- handle orders
-       get "orders" $
-           do (DummyAppState ref) <- getState
-              visitorNumber <- liftIO $ atomicModifyIORef' ref $ \i -> (i+1, i+1)
-              text ("displaying all orders " <> )
+--       get "orders" $
+--           do (DummyAppState ref) <- getState
+--               "displaying all orders \n"
 -- handle single order
-       get ("orders" <//> var) $ \name ->
-           do (DummyAppState ref) <- getState
-              visitorNumber <- liftIO $ atomicModifyIORef' ref $ \i -> (i+1, i+1)
-              text ("displaying offer with name: " <> name <> " \n" <> T.pack (show visitorNumber))
+--       get ("orders" <//> var) $ \name ->
+--           do (DummyAppState ref) <- getState
+--              text ("displaying offer with name: " <> name <> " \n" <> T.pack (show visitorNumber))
+-- handle products
+
+-- handle single product
+
+
