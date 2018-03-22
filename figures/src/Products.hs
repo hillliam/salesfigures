@@ -14,6 +14,9 @@
 
 module Products where
 
+--import Data.HashMap as HM
+import Data.List --as LM
+
 import JSONParser_solution
 
 -- id key
@@ -38,3 +41,9 @@ loadproduct :: JValue -> String
 loadproduct (JObject item) = do
   let value = [ if k == "name" then v else "" | (k, JString v) <- item]
   unlines value
+
+populateproducts :: JValue -> [product]
+populateproducts (JArray item) = undefined
+
+getproduct :: JValue -> product
+getproduct (JObject item) = undefined

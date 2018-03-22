@@ -40,4 +40,8 @@ import JSONParser_solution
 --    , price         :: Lines
 --    } deriving (Show)
 
-
+readorders :: IO ()
+readorders = do
+      input <- readFile "orders.json"
+      let output = read input
+      putStrLn (show (output:: JValue))
