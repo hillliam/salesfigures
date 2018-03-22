@@ -20,11 +20,13 @@ extra-source-files:
 description:         Please see the README on Github at <https://github.com/githubuser/figures#readme>
 
 dependencies:
-- blaze-html
-- Spock >= 0.11
+- blaze-html    # for generating html
+- Spock >= 0.11 # web server
+#- plugins       # for executing haskell at runtime
 - mtl
 - text
-- lens >= 4.15
+- hashmap       # optimized map if used
+- lens >= 4.15  # easier object handaling
 - base >= 4.7 && < 5
 
 library:

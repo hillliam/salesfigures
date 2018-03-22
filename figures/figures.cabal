@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 183e71ff4ce6c538e88a13e9cf4919510e4096940beadfda7a4d860d09271994
+-- hash: baf78091c1429576cde958aa6b10db39eefc053e5ee534e5f806f07a43cc6373
 
 name:           figures
 version:        0.1.0.0
@@ -32,6 +32,7 @@ library
       Spock >=0.11
     , base >=4.7 && <5
     , blaze-html
+    , hashmap
     , lens >=4.15
     , mtl
     , text
@@ -58,6 +59,7 @@ executable figures-exe
     , base >=4.7 && <5
     , blaze-html
     , figures
+    , hashmap
     , lens >=4.15
     , mtl
     , text
@@ -76,6 +78,7 @@ test-suite figures-test
     , base >=4.7 && <5
     , blaze-html
     , figures
+    , hashmap
     , lens >=4.15
     , mtl
     , text
