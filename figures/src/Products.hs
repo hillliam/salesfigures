@@ -48,26 +48,26 @@ loadproduct (JObject item) = do
 
 -- returns true if the current
 isvariation :: JValue -> Bool
-isvariation (JArray item) = do
-  let value = [ k == "variation" | (k, v) <- item]
-  value == True
+isvariation (JObject item) = fst (head item) == "variation"
 
 toproducts :: JValue -> [Product]
-toproducts (JArray item) = map toprocuct item
+toproducts (JArray item) = map toproduct item
 
-toprocuct :: JValue -> Product
-toproduct (JArray item) = do
-  let value = [ k == "variation" | (k, v) <- item]
-  let sku = [ k | (k, v) <- value]
+getarrayinvariation :: JValue -> [Product]
+getarrayinvariation (JObject item) = if isvariation item then map toproduct (snd (head item)) else []
+
+toproduct :: JValue -> Product
+toproduct (JObject item) = do
+  let sku = [ k | (k, v) <- item]
   let rest = [ v | (k, v) <- item]
-  let prices = getprices rest
-  return (sku, prices)
+  let prices = getprices (head rest)
+  Product (head sku) prices
 
 getprices :: JValue -> [Price]
-getprices (JArray item) = map toprocuct item
+getprices (JArray item) = map getprice item
 
 getprice :: JValue -> Price
 getprice (JObject item) = do
   let typeof = [ k | (k, JNumber v) <- item]
   let value = [ v | (k, JNumber v) <- item]
-  return (typeof, vaalue)
+  Price (unlines typeof) (head value:: Double)
