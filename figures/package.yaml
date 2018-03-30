@@ -1,17 +1,17 @@
 name:                figures
 version:             0.1.0.0
-github:              "githubuser/figures"
+github:              "hillliam/salesfigures"
 license:             BSD3
-author:              "Author name here"
+author:              "liam hill"
 maintainer:          "example@example.com"
-copyright:           "2018 Author name here"
+copyright:           "2018 liam hill"
 
 extra-source-files:
 - README.md
 - ChangeLog.md
 
 # Metadata used when publishing your package
-# synopsis:            Short description of your package
+synopsis:            application to display figures from collected data
 # category:            Web
 
 # To avoid duplicated efforts in documentation and dealing with the
@@ -27,7 +27,7 @@ dependencies:
 - text
 - hashmap       # optimized map if used
 - lens >= 4.15  # easier object handaling
-- base >= 4.7 && < 5
+- base >= 4.7
 
 library:
   source-dirs: src
