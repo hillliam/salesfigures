@@ -23,9 +23,13 @@ import JSONParser_solution
 -- name string
 -- description string
 -- variants type of tshirt
--- list of prices
--- list of options
--- sku product code
+--  list of prices
+--  list of options
+--  sku product code
+
+data Price = Price String Double deriving (Show)
+data Product = Product String [Price] deriving (Show)
+
 
 readproducts :: IO ()
 readproducts = do
@@ -40,10 +44,30 @@ loadproducts (JArray item) = map loadproduct item
 loadproduct :: JValue -> String
 loadproduct (JObject item) = do
   let value = [ if k == "name" then v else "" | (k, JString v) <- item]
-  unlines value
+  show value
 
-populateproducts :: JValue -> [product]
-populateproducts (JArray item) = undefined
+-- returns true if the current
+isvariation :: JValue -> Bool
+isvariation (JArray item) = do
+  let value = [ k == "variation" | (k, v) <- item]
+  value == True
 
-getproduct :: JValue -> product
-getproduct (JObject item) = undefined
+toproducts :: JValue -> [Product]
+toproducts (JArray item) = map toprocuct item
+
+toprocuct :: JValue -> Product
+toproduct (JArray item) = do
+  let value = [ k == "variation" | (k, v) <- item]
+  let sku = [ k | (k, v) <- value]
+  let rest = [ v | (k, v) <- item]
+  let prices = getprices rest
+  return (sku, prices)
+
+getprices :: JValue -> [Price]
+getprices (JArray item) = map toprocuct item
+
+getprice :: JValue -> Price
+getprice (JObject item) = do
+  let typeof = [ k | (k, JNumber v) <- item]
+  let value = [ v | (k, JNumber v) <- item]
+  return (typeof, vaalue)
