@@ -48,13 +48,40 @@ loadproduct (JObject item) = do
 
 -- returns true if the current
 isvariation :: JValue -> Bool
-isvariation (JObject item) = fst (head item) == "variation"
+isvariation (JObject item) = fst (last item) == "variation"
 
 toproducts :: JValue -> [Product]
 toproducts (JArray item) = map toproduct item
 
-getarrayinvariation :: JValue -> [Product]
-getarrayinvariation (JObject item) = if isvariation item then map toproduct (snd (head item)) else []
+getcount ::JValue -> Int
+getcount (JArray item) = length item
+
+getguid :: JValue -> String
+getguid (JObject item) = do
+    let guid = head item
+    let value = [ v | (k, JString v) <- guid]
+    head value
+
+getname :: JValue -> String
+getname (JObject item) = do
+    let guid = item !! 1
+    let value = [ v | (k, JString v) <- guid]
+    head value
+
+getdescription :: JValue -> String
+getdescription (JObject item) = do
+    let guid = item !! 2
+    let value = [ v | (k, JString v) <- guid]
+    head value
+
+--getvalue :: JValue -> Int -> String
+--getvalue (JObject item) index = do
+--    --let guid = item !! index
+--    let value = [ v | (k, JString v) <- (item !! index)]
+--    head value
+--
+--getarrayinvariation :: JValue -> [Product]
+--getarrayinvariation (JObject item) = if isvariation item then map toproduct (snd (head item)) else []
 
 toproduct :: JValue -> Product
 toproduct (JObject item) = do
