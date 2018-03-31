@@ -59,26 +59,22 @@ getcount (JArray item) = length item
 getguid :: JValue -> String
 getguid (JObject item) = do
     let guid = head item
-    let value = [ v | (k, JString v) <- guid]
-    head value
+    show (snd guid)
 
 getname :: JValue -> String
 getname (JObject item) = do
     let guid = item !! 1
-    let value = [ v | (k, JString v) <- guid]
-    head value
+    show (snd guid)
 
 getdescription :: JValue -> String
 getdescription (JObject item) = do
     let guid = item !! 2
-    let value = [ v | (k, JString v) <- guid]
-    head value
+    show (snd guid)
 
---getvalue :: JValue -> Int -> String
---getvalue (JObject item) index = do
---    --let guid = item !! index
---    let value = [ v | (k, JString v) <- (item !! index)]
---    head value
+getvalue :: JValue -> Int -> String
+getvalue (JObject item) index = do
+    let guid = item !! index
+    show (snd guid)
 --
 --getarrayinvariation :: JValue -> [Product]
 --getarrayinvariation (JObject item) = if isvariation item then map toproduct (snd (head item)) else []
