@@ -43,7 +43,12 @@ readproducts = do
 --      let output = read input
 --      let first = head output
 --      let variation = getvalue first 3
+--      let pdata = getvalue variation 0
 --      let pdata = map toproduct output
+--      let prices = getvalue pdata 0
+--      let gbpprice = getvalue prices 0
+--      let usdprice = getvalue prices 1
+--      let eurprice = getvalue prices 2
 
 loadproducts :: JValue -> [String]
 loadproducts (JArray item) = map loadproduct item
@@ -79,6 +84,11 @@ getdescription (JObject item) = do
     let guid = item !! 2
     show (snd guid)
 
+getsku :: JValue -> String
+getsku (JObject item) = do
+    let guid = item !! 2
+    show (snd guid)
+
 getvalue :: JValue -> Int -> JValue
 getvalue (JObject item) index = do
     let guid = item !! index
@@ -95,6 +105,7 @@ toproduct (JObject item) = do
   --let sku = [ k | (k, v) <- item]
   --let rest = [ v | (k, v) <- item]
   let sub = item !! 3
+  let sku = sub
   let prices = getprices (snd sub)--(snd (item !! 3))
   --print getcount item
   Product (show name) prices
@@ -105,9 +116,9 @@ getprices (JObject item) = map getprice [ v | (k, v) <- item]
 
 getprice :: JValue -> Price
 getprice (JObject item) = do
-  let typeof = [ k | (k, JNumber v) <- item]
-  let value = [ v | (k, JNumber v) <- item]
-  Price (unlines typeof) (head value:: Double)
+  let typeof = [ (k, v) | (k, JNumber v) <- item]
+  --let value = [ v | (k, JNumber v) <- item]
+  Price (fst typeof) (snd value)
 
 --showprice :: Price -> String
 --showprice name value = name ++ value
