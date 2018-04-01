@@ -20,6 +20,7 @@ synopsis:            application to display figures from collected data
 description:         Please see the README on Github at <https://github.com/githubuser/figures#readme>
 
 dependencies:
+- pathwalk      # for handaling the full data
 - blaze-html    # for generating html
 - Spock >= 0.11 # web server
 #- plugins       # for executing haskell at runtime
