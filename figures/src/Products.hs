@@ -30,13 +30,20 @@ import JSONParser_solution
 data Price = Price String Double deriving (Show)
 data Product = Product String [Price] deriving (Show)
 
-
 readproducts :: IO ()
 readproducts = do
       input <- readFile "products.json"
       let output = read input
       putStrLn (show (output:: JValue))
       putStrLn  (unwords (loadproducts (output:: JValue)))
+
+--getpricedata :: IO () -> [Product]
+--getpricedata = do
+--      input <- readFile "products.json"
+--      let output = read input
+--      let first = head output
+--      let variation = getvalue first 3
+--      let pdata = map toproduct output
 
 loadproducts :: JValue -> [String]
 loadproducts (JArray item) = map loadproduct item
@@ -55,6 +62,7 @@ toproducts (JArray item) = map toproduct item
 
 getcount ::JValue -> Int
 getcount (JArray item) = length item
+getcount (JObject item) = length item
 
 getguid :: JValue -> String
 getguid (JObject item) = do
@@ -71,26 +79,35 @@ getdescription (JObject item) = do
     let guid = item !! 2
     show (snd guid)
 
-getvalue :: JValue -> Int -> String
+getvalue :: JValue -> Int -> JValue
 getvalue (JObject item) index = do
     let guid = item !! index
-    show (snd guid)
+    snd guid
 --
 --getarrayinvariation :: JValue -> [Product]
 --getarrayinvariation (JObject item) = if isvariation item then map toproduct (snd (head item)) else []
 
 toproduct :: JValue -> Product
 toproduct (JObject item) = do
-  let sku = [ k | (k, v) <- item]
-  let rest = [ v | (k, v) <- item]
-  let prices = getprices (head rest)
-  Product (head sku) prices
+  let guid = snd (head item)
+  let name = snd (item !! 1)
+  let description = snd (item !! 2)
+  --let sku = [ k | (k, v) <- item]
+  --let rest = [ v | (k, v) <- item]
+  let sub = item !! 3
+  let prices = getprices (snd sub)--(snd (item !! 3))
+  --print getcount item
+  Product (show name) prices
 
 getprices :: JValue -> [Price]
 getprices (JArray item) = map getprice item
+getprices (JObject item) = map getprice [ v | (k, v) <- item]
 
 getprice :: JValue -> Price
 getprice (JObject item) = do
   let typeof = [ k | (k, JNumber v) <- item]
   let value = [ v | (k, JNumber v) <- item]
   Price (unlines typeof) (head value:: Double)
+
+--showprice :: Price -> String
+--showprice name value = name ++ value
