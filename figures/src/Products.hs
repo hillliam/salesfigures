@@ -27,7 +27,7 @@ import JSONParser_solution
 --  list of options
 --  sku product code
 
-data Price = Price String Double deriving (Show)
+data Price = Price String String deriving (Show)
 data Product = Product String [Price] deriving (Show)
 
 readproducts :: IO ()
@@ -116,9 +116,9 @@ getprices (JObject item) = map getprice [ v | (k, v) <- item]
 
 getprice :: JValue -> Price
 getprice (JObject item) = do
-  let typeof = [ (k, v) | (k, JNumber v) <- item]
+  let typeof = [ (k, show v) | (k, JNumber v) <- item]
   --let value = [ v | (k, JNumber v) <- item]
-  Price (fst typeof) (snd value)
+  uncurry Price (head typeof)
 
 --showprice :: Price -> String
 --showprice name value = name ++ value

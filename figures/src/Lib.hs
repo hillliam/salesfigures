@@ -26,3 +26,27 @@ parseproducts (JArray item) =  map getdiscount item
 
 getproffit :: JValue
 getproffit = undefined
+
+getproductcount :: String
+getproductcount = undefined
+
+getallproducts :: String
+getallproducts = undefined
+
+getallMcCoy :: String
+getallMcCoy = undefined
+
+getpriceof1038 :: String
+getpriceof1038 = undefined
+
+getlargeChekov :: String
+getlargeChekov = undefined
+
+getChekovsizes :: String
+getChekovsizes = undefined
+
+getordercount :: String
+getordercount = undefined
+
+getallorders :: String
+getallorders = undefined

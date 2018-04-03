@@ -8,7 +8,8 @@
 -- Stability   :
 -- Portability :
 --
--- |removed because it makes testing harder
+-- this allows the runtime evaluation of haskell if the required package is included.
+-- removed because it makes testing harder
 --
 -----------------------------------------------------------------------------
 
