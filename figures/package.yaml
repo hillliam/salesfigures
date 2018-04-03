@@ -17,17 +17,19 @@ synopsis:            application to display figures from collected data
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on Github at <https://github.com/githubuser/figures#readme>
+description:         Please see the README on Github at <https://github.com/hillliam/salesfigures#readme>
 
 dependencies:
-- pathwalk      # for handaling the full data
-- blaze-html    # for generating html
-- Spock >= 0.11 # web server
-#- plugins       # for executing haskell at runtime
+- persistent-sqlite # for in memory database
+#- esqueleto         # for easy table declaration
+- pathwalk          # for handaling the full data
+- blaze-html        # for generating html
+- Spock >= 0.11     # web server
+#- plugins          # for executing haskell at runtime
 - mtl
 - text
-- hashmap       # optimized map if used
-- lens >= 4.15  # easier object handaling
+- hashmap           # optimized map if used
+- lens >= 4.15      # easier object handaling
 - base >= 4.7
 
 library:
@@ -53,4 +55,5 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - QuickCheck # testing framework
     - figures

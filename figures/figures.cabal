@@ -2,12 +2,12 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 17f83745e8a9e57faa67105fdcd8f992d09ba7c5198468780480fffbc8ca00c6
+-- hash: 3b43fcad7d8c6d74e597360c26b3ee350d3d858262aacf623c038953f3ec39cc
 
 name:           figures
 version:        0.1.0.0
 synopsis:       application to display figures from collected data
-description:    Please see the README on Github at <https://github.com/githubuser/figures#readme>
+description:    Please see the README on Github at <https://github.com/hillliam/salesfigures#readme>
 homepage:       https://github.com/hillliam/salesfigures#readme
 bug-reports:    https://github.com/hillliam/salesfigures/issues
 author:         liam hill
@@ -37,6 +37,7 @@ library
     , lens >=4.15
     , mtl
     , pathwalk
+    , persistent-sqlite
     , text
   exposed-modules:
       Evalsystem
@@ -67,6 +68,7 @@ executable figures-exe
     , lens >=4.15
     , mtl
     , pathwalk
+    , persistent-sqlite
     , text
   other-modules:
       Paths_figures
@@ -79,7 +81,8 @@ test-suite figures-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      Spock >=0.11
+      QuickCheck
+    , Spock >=0.11
     , base >=4.7
     , blaze-html
     , figures
@@ -87,6 +90,7 @@ test-suite figures-test
     , lens >=4.15
     , mtl
     , pathwalk
+    , persistent-sqlite
     , text
   other-modules:
       Paths_figures
