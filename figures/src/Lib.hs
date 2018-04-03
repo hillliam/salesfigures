@@ -28,7 +28,7 @@ getproffit :: JValue
 getproffit = undefined
 
 getproductcount :: String
-getproductcount = undefined
+getproductcount = getpcount
 
 getallproducts :: String
 getallproducts = undefined
@@ -46,7 +46,8 @@ getChekovsizes :: String
 getChekovsizes = undefined
 
 getordercount :: String
-getordercount = undefined
+getordercount = getocount
 
 getallorders :: String
 getallorders = undefined
+

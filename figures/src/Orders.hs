@@ -15,6 +15,8 @@
 module Orders where
 
 import JSONParser_solution
+import Common
+
 -- id key
 -- lines product + quantity
 --
@@ -45,3 +47,10 @@ readorders = do
       input <- readFile "orders.json"
       let output = read input
       putStrLn (show (output:: JValue))
+
+
+getocount :: IO ()
+getocount = do
+      input <- readFile "orders.json"
+      let output = read input
+      show getcount output

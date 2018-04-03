@@ -18,6 +18,7 @@ module Products where
 import Data.List --as LM
 
 import JSONParser_solution
+import Common
 
 -- id key
 -- name string
@@ -36,6 +37,13 @@ readproducts = do
       let output = read input
       putStrLn (show (output:: JValue))
       putStrLn  (unwords (loadproducts (output:: JValue)))
+
+getpcount :: IO ()
+getpcount = do
+      input <- readFile "products.json"
+      let output = read input
+      show getcount output
+
 
 --getpricedata :: IO () -> [Product]
 --getpricedata = do
@@ -65,10 +73,6 @@ isvariation (JObject item) = fst (last item) == "variation"
 toproducts :: JValue -> [Product]
 toproducts (JArray item) = map toproduct item
 
-getcount ::JValue -> Int
-getcount (JArray item) = length item
-getcount (JObject item) = length item
-
 getguid :: JValue -> String
 getguid (JObject item) = do
     let guid = head item
@@ -88,11 +92,6 @@ getsku :: JValue -> String
 getsku (JObject item) = do
     let guid = item !! 2
     show (snd guid)
-
-getvalue :: JValue -> Int -> JValue
-getvalue (JObject item) index = do
-    let guid = item !! index
-    snd guid
 --
 --getarrayinvariation :: JValue -> [Product]
 --getarrayinvariation (JObject item) = if isvariation item then map toproduct (snd (head item)) else []
