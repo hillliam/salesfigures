@@ -55,5 +55,6 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - HUnit      # testing framework i am more likely to use
     - QuickCheck # testing framework
     - figures

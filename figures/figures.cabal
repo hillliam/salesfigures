@@ -1,74 +1,99 @@
-name: figures
-version: 0.1.0.0
-cabal-version: >=1.10
-build-type: Simple
-license: BSD3
-license-file: LICENSE
-copyright: 2018 liam hill
-maintainer: example@example.com
-homepage: https://github.com/hillliam/salesfigures#readme
-bug-reports: https://github.com/hillliam/salesfigures/issues
-synopsis: application to display figures from collected data
-description:
-    Please see the README on Github at <https://github.com/hillliam/salesfigures#readme>
-author: liam hill
+-- This file has been generated from package.yaml by hpack version 0.20.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 87c0946a6c62ad0d89e1a51bfaa9dc6b32e5fc131d5874be4cac5670c8ca45cb
+
+name:           figures
+version:        0.1.0.0
+synopsis:       application to display figures from collected data
+description:    Please see the README on Github at <https://github.com/hillliam/salesfigures#readme>
+homepage:       https://github.com/hillliam/salesfigures#readme
+bug-reports:    https://github.com/hillliam/salesfigures/issues
+author:         liam hill
+maintainer:     example@example.com
+copyright:      2018 liam hill
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
 extra-source-files:
     ChangeLog.md
     README.md
 
 source-repository head
-    type: git
-    location: https://github.com/hillliam/salesfigures
+  type: git
+  location: https://github.com/hillliam/salesfigures
 
 library
-    exposed-modules:
-        Comon
-        Evalsystem
-        Htmlgen
-        JSONLexer
-        JSONParser_solution
-        Lib
-        Offers
-        Orders
-        ParserCombinators
-        Pathgetter
-        Products
-    build-depends:
-        Spock >=0.11,
-        base >=4.7,
-        blaze-html -any,
-        hashmap -any,
-        lens >=4.15,
-        mtl -any,
-        pathwalk -any,
-        persistent-sqlite -any,
-        text -any
-    default-language: Haskell2010
-    hs-source-dirs: src
-    other-modules:
-        Paths_figures
+  hs-source-dirs:
+      src
+  build-depends:
+      Spock >=0.11
+    , base >=4.7
+    , blaze-html
+    , hashmap
+    , lens >=4.15
+    , mtl
+    , pathwalk
+    , persistent-sqlite
+    , text
+  exposed-modules:
+      Common
+      Evalsystem
+      Htmlgen
+      JSONLexer
+      JSONParser_solution
+      Lib
+      Offers
+      Orders
+      ParserCombinators
+      Pathgetter
+      Products
+  other-modules:
+      Paths_figures
+  default-language: Haskell2010
 
-executable  figures-exe
-    main-is: Main.hs
+executable figures-exe
+  main-is: Main.hs
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      Spock >=0.11
+    , base >=4.7
+    , blaze-html
+    , figures
+    , hashmap
+    , lens >=4.15
+    , mtl
+    , pathwalk
+    , persistent-sqlite
+    , text
+  other-modules:
+      Paths_figures
+  default-language: Haskell2010
 
-test-suite  figures-test
-    type: exitcode-stdio-1.0
-    main-is: Spec.hs
-    build-depends:
-        QuickCheck -any,
-        Spock >=0.11,
-        base >=4.7,
-        blaze-html -any,
-        figures -any,
-        hashmap -any,
-        lens >=4.15,
-        mtl -any,
-        pathwalk -any,
-        persistent-sqlite -any,
-        text -any
-    default-language: Haskell2010
-    hs-source-dirs: test
-    other-modules:
-        Comon
-        Paths_figures
-    ghc-options: -threaded -rtsopts -with-rtsopts=-N
+test-suite figures-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      HUnit
+    , QuickCheck
+    , Spock >=0.11
+    , base >=4.7
+    , blaze-html
+    , figures
+    , hashmap
+    , lens >=4.15
+    , mtl
+    , pathwalk
+    , persistent-sqlite
+    , text
+  other-modules:
+      Paths_figures
+  default-language: Haskell2010
