@@ -29,4 +29,10 @@ getcount ::JValue -> Int
 getcount (JArray item) = length item
 getcount (JObject item) = length item
 
+-- reads a file and path that it is given
 
+--readfile :: String -> String -> IO JValue
+--readfile dir file = do
+--      let input = readFile (dir ++ file)
+--      item <- read input
+--      return item

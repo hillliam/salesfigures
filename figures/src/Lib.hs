@@ -24,11 +24,12 @@ parseproducts (JArray item) =  map getdiscount item
 --      let output = read readproductsfile
 --      show (output:: JValue)
 
+-- gui functions
 getproffit :: JValue
 getproffit = undefined
 
 getproductcount :: String
-getproductcount = getpcount
+getproductcount = undefined-- getpcount
 
 getallproducts :: String
 getallproducts = undefined
@@ -46,7 +47,7 @@ getChekovsizes :: String
 getChekovsizes = undefined
 
 getordercount :: String
-getordercount = getocount
+getordercount = undefined-- getocount
 
 getallorders :: String
 getallorders = undefined

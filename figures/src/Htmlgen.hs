@@ -36,14 +36,14 @@ genmainpage = docTypeHtml $ do
      H.head $ do
          H.title "main"
      body $ do
-         p $ "number of products: " toMarkup getproductcount
-         P $ "loaded products: " toMarkup getallproducts
-         p $ "number of orders: " toMarkup getordercount
-         P $ "loaded orders: " toMarkup getallorders
-         P $ "all McCoy types: " toMarkup getallMcCoy
-         P $ "prices of sku 1038 : " toMarkup getpriceof1038
-         P $ "sku and price of large Chekov: " toMarkup getlargeChekov
-         P $ "sku and sizes of all chekov: " toMarkup getChekovsizes
+--         P "number of products: " toMarkup getproductcount
+--         P "loaded products: "  toMarkup getallproducts
+--         P "number of orders: " toMarkup getordercount
+--         P "loaded orders: " toMarkup getallorders
+--         P "all McCoy types: " toMarkup getallMcCoy
+--         P "prices of sku 1038 : " toMarkup getpriceof1038
+--         P "sku and price of large Chekov: " toMarkup getlargeChekov
+--         P "sku and sizes of all chekov: " toMarkup getChekovsizes
          buttons "/products" "display all products"
          buttons "/offers" "display all offers"
          buttons "/orders" "display all orders"
