@@ -42,9 +42,21 @@ getpcount :: IO ()
 getpcount = do
       input <- readFile "products.json"
       let output = read input
-      show getcount output
+      putStrLn (show (getcount (output:: JValue)))
 
+getskucount :: IO ()
+getskucount = do
+      input <- readFile "products.json"
+      let output = read input
+      putStrLn (show (sum (skucounts (output:: JValue))))
 
+skucounts :: JValue -> [Int]
+skucounts (JArray item) = map skucount item
+
+skucount :: JValue -> Int
+skucount (JObject item) = do
+    let sub = item !! 3
+    getcount (snd sub)
 --getpricedata :: IO () -> [Product]
 --getpricedata = do
 --      input <- readFile "products.json"
