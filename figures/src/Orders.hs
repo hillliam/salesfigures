@@ -48,9 +48,8 @@ readorders = do
       let output = read input
       putStrLn (show (output:: JValue))
 
-
 getocount :: IO ()
 getocount = do
       input <- readFile "orders.json"
       let output = read input
-      show getcount output
+      putStrLn (show (getcount (output:: JValue)))
