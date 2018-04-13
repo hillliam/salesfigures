@@ -49,5 +49,8 @@ app =
 
 -- handle single product
 
+savetestpage :: IO ()
+savetestpage = writeFile "index.html" (totext gentest)
+
 savepage :: IO ()
-savepage = writeFile "index.html" (html (T.pack (totext gentest)))
+savepage = writeFile "index.html" (totext genmainpage)
