@@ -1,5 +1,9 @@
+import Test.Hspec
 import Test.HUnit
-import Quckcheck
+import Lib
+import JSONParser_solution
+--import Quckcheck
+import Control.Exception (evaluate)
 
 main :: IO ()
 main = do
@@ -8,14 +12,18 @@ main = do
 
 testproduct :: IO()
 testproduct = do
-    input <- readFile "products.json"
-    let output = read input
+--    input <- readFile "products.json"
+--    let output = read input
     testpcount
 
 testorders :: IO()
 testorders = do
-    input <- readFile "orders.json"
-    let output = read input
+--    input <- readFile "orders.json"
+--    let output = read input
+    testocount
 
-testpcount :: Jvalue -> Bool
-testpcount =
+testpcount :: Bool
+testpcount = getproductcount == 20
+
+testocount :: Bool
+testocount = getordercount == 100
