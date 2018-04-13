@@ -32,7 +32,7 @@ getproductcount :: String
 getproductcount = undefined-- getpcount
 
 getallproducts :: String
-getallproducts = undefined
+getallproducts = undefined-- readproducts
 
 getallMcCoy :: String
 getallMcCoy = undefined
@@ -50,5 +50,5 @@ getordercount :: String
 getordercount = undefined-- getocount
 
 getallorders :: String
-getallorders = undefined
+getallorders = undefined--
 

@@ -57,4 +57,5 @@ tests:
     dependencies:
     - HUnit      # testing framework i am more likely to use
     - QuickCheck # testing framework
+    - hspec      # base testing framework
     - figures

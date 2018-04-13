@@ -57,6 +57,7 @@ skucount :: JValue -> Int
 skucount (JObject item) = do
     let sub = item !! 3
     getcount (snd sub)
+
 --getpricedata :: IO () -> [Product]
 --getpricedata = do
 --      input <- readFile "products.json"
@@ -70,6 +71,37 @@ skucount (JObject item) = do
 --      let usdprice = getvalue prices 1
 --      let eurprice = getvalue prices 2
 
+getallmcoy :: IO ()
+getallmcoy = do
+      input <- readFile "products.json"
+      let output = read input
+      putStrLn (show (unlines (findmcoys (output:: JValue))))
+
+findmcoys :: JValue -> [String]
+findmcoys (JArray item) = map findmcoy item
+
+findmcoy :: JValue -> String
+findmcoy (JObject item) = do
+    let name = snd (item !! 1)
+    if (isInfixOf (show name) "Dr. McCoy T-shirt") then
+        show ([item])
+    else
+        ""
+
+get1038 :: IO ()
+get1038 = do
+      input <- readFile "products.json"
+      let output = read input
+      putStrLn (show (unlines (find1038s (output:: JValue))))
+
+find1038s :: JValue -> [String]
+find1038s (JArray item) = map find1038 item
+
+find1038 :: JValue -> String
+find1038 (JObject item) = do
+    let variation = getvalue first 3
+
+
 loadproducts :: JValue -> [String]
 loadproducts (JArray item) = map loadproduct item
 
@@ -78,7 +110,7 @@ loadproduct (JObject item) = do
   let value = [ if k == "name" then v else "" | (k, JString v) <- item]
   show value
 
--- returns true if the current
+-- returns true if the current object has key name variation
 isvariation :: JValue -> Bool
 isvariation (JObject item) = fst (last item) == "variation"
 

@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 87c0946a6c62ad0d89e1a51bfaa9dc6b32e5fc131d5874be4cac5670c8ca45cb
+-- hash: 2e80433f65fd70a7ace4cf0a13d64d6e41227b5bf8f1c3787f958802fdbedb87
 
 name:           figures
 version:        0.1.0.0
@@ -89,6 +89,7 @@ test-suite figures-test
     , blaze-html
     , figures
     , hashmap
+    , hspec
     , lens >=4.15
     , mtl
     , pathwalk
