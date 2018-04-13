@@ -100,11 +100,14 @@ find1038s (JArray item) = map find1038 item
 find1038 :: JValue -> String
 find1038 (JObject item) = do
     let variation = snd (item !! 3)
-    unlines (get1038sku variation)
+    unlines (getskubykey variation "1038")
     --show value
 
-get1038sku :: JValue -> [String]
-get1038sku (JObject item) = [ if isInfixOf "SKU-1038" k then show v else "" | (k, v) <- item]
+--get1038sku :: JValue -> [String]
+--get1038sku (JObject item) = getskubykey (JValue item) "1038"
+
+getskubykey :: JValue -> String -> [String]
+getskubykey (JObject item) key = [ if isInfixOf key k then show v else "" | (k, v) <- item]
 
 loadproducts :: JValue -> [String]
 loadproducts (JArray item) = map loadproduct item
