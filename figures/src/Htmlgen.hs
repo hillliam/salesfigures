@@ -35,18 +35,21 @@ genmainpage :: Html
 genmainpage = docTypeHtml $ do
      H.head $ do
          H.title "main"
-     body $ do
---         P "number of products: " toMarkup getproductcount
---         P "loaded products: "  toMarkup getallproducts
---         P "number of orders: " toMarkup getordercount
---         P "loaded orders: " toMarkup getallorders
---         P "all McCoy types: " toMarkup getallMcCoy
---         P "prices of sku 1038 : " toMarkup getpriceof1038
---         P "sku and price of large Chekov: " toMarkup getlargeChekov
---         P "sku and sizes of all chekov: " toMarkup getChekovsizes
+     H.body $ do
+         H.p $ toMarkup ("number of products: " ++ getproductcount)
+         H.p $ toMarkup ("loaded products: "  ++ getallproducts)
+         H.p $ toMarkup ("number of orders: " ++ getordercount)
+         H.p $ toMarkup ("loaded orders: " ++ getallorders)
+         H.p $ toMarkup ("all McCoy types: " ++ getallMcCoy)
+         H.p $ toMarkup ("prices of sku 1038 : " ++ getpriceof1038)
+         H.p $ toMarkup ("sku and price of large Chekov: " ++ getlargeChekov)
+         H.p $ toMarkup ("sku and sizes of all chekov: " ++ getChekovsizes)
          buttons "/products" "display all products"
          buttons "/offers" "display all offers"
          buttons "/orders" "display all orders"
+
+--paragraph :: String -> a -> Html
+--paragraph text x = P $  toMarkup (text ++ x)
 
 buttons :: String -> String -> Html
 buttons code text = button! href (toValue code) $  toMarkup text
