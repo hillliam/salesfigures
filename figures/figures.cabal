@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2e80433f65fd70a7ace4cf0a13d64d6e41227b5bf8f1c3787f958802fdbedb87
+-- hash: 91185dbd044ead81238d61eb126a925932d307cc19b40048743fb3cb6d75ada6
 
 name:           figures
 version:        0.1.0.0
@@ -30,7 +30,8 @@ library
   hs-source-dirs:
       src
   build-depends:
-      Spock >=0.11
+      HDBC
+    , Spock >=0.11
     , base >=4.7
     , blaze-html
     , hashmap
@@ -41,6 +42,7 @@ library
     , text
   exposed-modules:
       Common
+      Databaseversion
       Evalsystem
       Htmlgen
       JSONLexer
@@ -61,7 +63,8 @@ executable figures-exe
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      Spock >=0.11
+      HDBC
+    , Spock >=0.11
     , base >=4.7
     , blaze-html
     , figures
@@ -82,7 +85,8 @@ test-suite figures-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      HUnit
+      HDBC
+    , HUnit
     , QuickCheck
     , Spock >=0.11
     , base >=4.7

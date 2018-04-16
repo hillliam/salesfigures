@@ -20,6 +20,8 @@ synopsis:            application to display figures from collected data
 description:         Please see the README on Github at <https://github.com/hillliam/salesfigures#readme>
 
 dependencies:
+- HDBC              # a better database framework
+#- HDBC-sqlite3      # for sqlite support
 - persistent-sqlite # for in memory database
 #- esqueleto         # for easy table declaration
 - pathwalk          # for handaling the full data
@@ -55,6 +57,7 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - HTF        # allows both QuickCheck and HUnit to be used together
     - HUnit      # testing framework i am more likely to use
     - QuickCheck # testing framework
     - hspec      # base testing framework
