@@ -1,14 +1,14 @@
 -----------------------------------------------------------------------------
 --
 -- Module      :  Products
--- Copyright   :  2018 Author name here
+-- Copyright   :  2018 liam hill
 -- License     :  BSD3
 --
 -- Maintainer  :  example@example.com
 -- Stability   :
 -- Portability :
 --
--- |
+-- containes all of the code for hanadaling the product JSON file
 --
 -----------------------------------------------------------------------------
 
@@ -78,13 +78,21 @@ getallmcoy = do
       putStrLn (show (unlines (findmcoys (output:: JValue))))
 
 findmcoys :: JValue -> [String]
-findmcoys (JArray item) = map findmcoy item
+findmcoys (JArray item) = map findmcoy item --map findbyname (item "McCoy")
 
 findmcoy :: JValue -> String
 findmcoy (JObject item) = do
     let name = snd (item !! 1)
-    if (isInfixOf "McCoy" (show name)) then
-        show ([item])
+    if isInfixOf "McCoy" (show name) then
+        show [item]
+    else
+        "" --show name++ " a "
+
+findbyname :: JValue -> String -> String
+findbyname (JObject item) key = do
+    let name = snd (item !! 1)
+    if isInfixOf key (show name) then
+        show [item]
     else
         "" --show name++ " a "
 
@@ -108,6 +116,35 @@ find1038 (JObject item) = do
 
 getskubykey :: JValue -> String -> [String]
 getskubykey (JObject item) key = [ if isInfixOf key k then show v else "" | (k, v) <- item]
+
+-- the version that should be used.
+--getskubyvindex :: JValue => a -> Int -> String -> [String]
+getskubyvindex (JObject item) index key f = [ if isInfixOf key (show (getvalue v index)) then f v else "" | (k, v) <- item]
+
+getskubyprice :: JValue -> String -> [String]
+getskubyprice (JObject item) key = [ if isInfixOf key (show (getvalue v 0)) then show v else "" | (k, v) <- item]
+
+-- modified to be used with getlChekov
+getskubyoption :: JValue -> String -> [String]
+getskubyoption (JObject item) key = [ if isInfixOf key (show (getvalue v 1)) then show (getvalue v 0) else "" | (k, v) <- item]
+
+getlChekov :: IO ()
+getlChekov = do
+      input <- readFile "products.json"
+      let output = read input
+      putStrLn (show (unlines (findlchekovs (output:: JValue))))
+
+findlchekovs :: JValue -> [String]
+findlchekovs (JArray item) = map findchekovl item
+
+findchekovl :: JValue -> String
+findchekovl (JObject item) = do
+    let name = snd (item !! 1)
+    if isInfixOf "Chekov" (show name) then do
+        let variation = snd (item !! 3)
+        unlines (getskubyoption variation "L")
+    else
+        "" --show name++ " a "
 
 loadproducts :: JValue -> [String]
 loadproducts (JArray item) = map loadproduct item
@@ -172,3 +209,4 @@ getprice (JObject item) = do
 
 --showprice :: Price -> String
 --showprice name value = name ++ value
+

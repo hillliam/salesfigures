@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------------
 --
 -- Module      :  Htmlgen
--- Copyright   :  2018 Author name here
+-- Copyright   :  2018 liam hill
 -- License     :  BSD3
 --
 -- Maintainer  :  example@example.com

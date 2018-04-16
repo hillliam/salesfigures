@@ -5,6 +5,7 @@ import Control.Lens
 import Offers
 import Orders
 import Products
+import Databaseversion
 
 -- this will store the buisness logic to generate data
 
@@ -35,13 +36,13 @@ getallproducts :: String
 getallproducts = undefined-- readproducts
 
 getallMcCoy :: String
-getallMcCoy = undefined
+getallMcCoy = undefined-- getallmcoy
 
 getpriceof1038 :: String
-getpriceof1038 = undefined
+getpriceof1038 = undefined-- get1038
 
 getlargeChekov :: String
-getlargeChekov = undefined
+getlargeChekov = undefined-- getlChekov
 
 getChekovsizes :: String
 getChekovsizes = undefined
