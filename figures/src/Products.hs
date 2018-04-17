@@ -108,25 +108,27 @@ find1038s (JArray item) = map find1038 item
 find1038 :: JValue -> String
 find1038 (JObject item) = do
     let variation = snd (item !! 3)
-    unlines (getskubykey variation "1038")
+    unlines (getskubyvindex variation 2 "1038" show)
     --show value
+
+
 
 --get1038sku :: JValue -> [String]
 --get1038sku (JObject item) = getskubykey (JValue item) "1038"
 
-getskubykey :: JValue -> String -> [String]
-getskubykey (JObject item) key = [ if isInfixOf key k then show v else "" | (k, v) <- item]
+--getskubykey :: JValue -> String -> [String]
+--getskubykey (JObject item) key = [ if isInfixOf key k then show v else "" | (k, v) <- item]
 
 -- the version that should be used.
 --getskubyvindex :: JValue => a -> Int -> String -> [String]
 getskubyvindex (JObject item) index key f = [ if isInfixOf key (show (getvalue v index)) then f v else "" | (k, v) <- item]
 
-getskubyprice :: JValue -> String -> [String]
-getskubyprice (JObject item) key = [ if isInfixOf key (show (getvalue v 0)) then show v else "" | (k, v) <- item]
+--getskubyprice :: JValue -> String -> [String]
+--getskubyprice (JObject item) key = [ if isInfixOf key (show (getvalue v 0)) then show v else "" | (k, v) <- item]
 
 -- modified to be used with getlChekov
-getskubyoption :: JValue -> String -> [String]
-getskubyoption (JObject item) key = [ if isInfixOf key (show (getvalue v 1)) then show (getvalue v 0) else "" | (k, v) <- item]
+--getskubyoption :: JValue -> String -> [String]
+--getskubyoption (JObject item) key = [ if isInfixOf key (show (getvalue v 1)) then show (getvalue v 0) else "" | (k, v) <- item]
 
 getlChekov :: IO ()
 getlChekov = do
@@ -142,7 +144,7 @@ findchekovl (JObject item) = do
     let name = snd (item !! 1)
     if isInfixOf "Chekov" (show name) then do
         let variation = snd (item !! 3)
-        unlines (getskubyoption variation "L")
+        unlines (getskubyvindex variation 1 "L" show)
     else
         "" --show name++ " a "
 
