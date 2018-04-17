@@ -139,14 +139,39 @@ getlChekov = do
 findlchekovs :: JValue -> [String]
 findlchekovs (JArray item) = map findchekovl item
 
+-- this can be made more generic
 findchekovl :: JValue -> String
 findchekovl (JObject item) = do
     let name = snd (item !! 1)
     if isInfixOf "Chekov" (show name) then do
         let variation = snd (item !! 3)
-        unlines (getskubyvindex variation 1 "L" show)
+        unlines (getskubyvindex variation 1 "L" showprices)
     else
         "" --show name++ " a "
+
+getsChekov :: IO ()
+getsChekov = do
+      input <- readFile "products.json"
+      let output = read input
+      putStrLn (show (unlines (findschekovs (output:: JValue))))
+
+findschekovs :: JValue -> [String]
+findschekovs (JArray item) = map findchekovs item
+
+findchekovs :: JValue -> String
+findchekovs (JObject item) = do
+    let name = snd (item !! 1)
+    if isInfixOf "Chekov" (show name) then do
+        let variation = snd (item !! 3)
+        unlines (getskubyvindex variation 1 "" showsizes)
+    else
+        "" --show name++ " a "
+
+showprices :: JValue -> String
+showprices (JObject item) = show (head item)
+
+showsizes :: JValue -> String
+showsizes (JObject item) = show (item !! 1)
 
 loadproducts :: JValue -> [String]
 loadproducts (JArray item) = map loadproduct item

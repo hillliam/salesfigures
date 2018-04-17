@@ -45,7 +45,7 @@ getlargeChekov :: String
 getlargeChekov = undefined-- getlChekov
 
 getChekovsizes :: String
-getChekovsizes = undefined
+getChekovsizes = undefined -- getsChekov
 
 getordercount :: String
 getordercount = undefined-- getocount
