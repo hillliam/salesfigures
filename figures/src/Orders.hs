@@ -53,3 +53,9 @@ getocount = do
       input <- readFile "orders.json"
       let output = read input
       putStrLn (show (getcount (output:: JValue)))
+
+getfirstorder:: IO ()
+getfirstorder = do
+      input <- readFile "orders.json"
+      let output = read input
+      putStrLn (show ( (output:: JValue)))

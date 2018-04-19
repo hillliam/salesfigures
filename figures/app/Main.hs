@@ -4,7 +4,7 @@ module Main where
 import Web.Spock
 --import qualified Web.Spock.Action as SA
 import Web.Spock.Config
-
+import JSONParser_solution
 import Control.Monad.Trans
 import Data.Monoid
 import Data.IORef
@@ -53,4 +53,7 @@ savetestpage :: IO ()
 savetestpage = writeFile "index.html" (totext gentest)
 
 savepage :: IO ()
-savepage = writeFile "index.html" (totext genmainpage)
+savepage = do
+    input <- readFile "products.json"
+    let output = read input
+    writeFile "index.html" (totext (genmainpage (output:: JValue)))

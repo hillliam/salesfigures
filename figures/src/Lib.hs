@@ -6,6 +6,8 @@ import Offers
 import Orders
 import Products
 import Databaseversion
+import Pathgetter
+import Common
 
 -- this will store the buisness logic to generate data
 
@@ -32,24 +34,33 @@ getproffit = undefined
 getproductcount :: String
 getproductcount = undefined-- getpcount
 
-getallproducts :: String
-getallproducts = undefined-- readproducts
+getpcount :: JValue -> String
+getpcount jvalue@(JArray item) =  show (getcount jvalue)
 
-getallMcCoy :: String
-getallMcCoy = undefined-- getallmcoy
+--getallproducts :: JValue -> String
+--getallproducts jvalue@(JArray item) = -- readproducts
 
-getpriceof1038 :: String
-getpriceof1038 = undefined-- get1038
+getskucount :: JValue -> String
+getskucount jvalue@(JArray item) = show (sum (skucounts jvalue)) -- getskucount
 
-getlargeChekov :: String
-getlargeChekov = undefined-- getlChekov
+getallMcCoy :: JValue -> String
+getallMcCoy jvalue@(JArray item) = show (cleanup (unlines (findmcoys jvalue)))-- getallmcoy
 
-getChekovsizes :: String
-getChekovsizes = undefined -- getsChekov
+getpriceof1038 :: JValue -> String
+getpriceof1038 jvalue@(JArray item) = show (cleanup (unlines (find1038s jvalue)))-- get1038
 
-getordercount :: String
-getordercount = undefined-- getocount
+getlargeChekov :: JValue -> String
+getlargeChekov jvalue@(JArray item) = show (cleanup (unlines (findlchekovs jvalue)))-- getlChekov
+
+getChekovsizes :: JValue -> String
+getChekovsizes jvalue@(JArray item) = show (cleanup (unlines (findschekovs jvalue))) -- getsChekov
+
+getordercount :: JValue -> String
+getordercount jvalue@(JArray item) = show (getcount jvalue)-- getocount
 
 getallorders :: String
-getallorders = undefined--
+getallorders = undefined-- readorders
+
+getfirstorder :: String
+getfirstorder = undefined-- getfirstorder
 

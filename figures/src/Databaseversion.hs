@@ -14,8 +14,12 @@
 
 module Databaseversion where
 
-import Database.HDBC
---import Database.HDBC.Sqlite3
+import Control.Applicative
+import Database.SQLite.Simple
+import Database.SQLite.Simple.FromRow
+
+--Connecttodb :: IO Connection
+--Connecttodb = open ":memory:"
 
 populatedatabase :: IO ()
 populatedatabase = undefined

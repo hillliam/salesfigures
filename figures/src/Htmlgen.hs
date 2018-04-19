@@ -15,6 +15,7 @@
 
 module Htmlgen where
 
+import JSONParser_solution
 import Control.Monad (forM_)
 import Text.Blaze.Html5 as H
 import Text.Blaze.Html5.Attributes as A
@@ -31,19 +32,20 @@ gentest = docTypeHtml $ do
          p "blank"
 --         p evaltest "m = 2"
 
-genmainpage :: Html
-genmainpage = docTypeHtml $ do
+genmainpage :: JValue -> Html
+genmainpage jvalue@(JArray item) = docTypeHtml $ do
      H.head $ do
          H.title "main"
      H.body $ do
-         H.p $ toMarkup ("number of products: " ++ getproductcount)
-         H.p $ toMarkup ("loaded products: "  ++ getallproducts)
-         H.p $ toMarkup ("number of orders: " ++ getordercount)
-         H.p $ toMarkup ("loaded orders: " ++ getallorders)
-         H.p $ toMarkup ("all McCoy types: " ++ getallMcCoy)
-         H.p $ toMarkup ("prices of sku 1038 : " ++ getpriceof1038)
-         H.p $ toMarkup ("sku and price of large Chekov: " ++ getlargeChekov)
-         H.p $ toMarkup ("sku and sizes of all chekov: " ++ getChekovsizes)
+         H.p $ toMarkup ("number of products: " ++ (getpcount jvalue))
+         H.p $ toMarkup ("number of skus: " ++ (getskucount jvalue))
+         --H.p $ toMarkup ("loaded products: "  ++ (getallproducts jvalue))
+         --H.p $ toMarkup ("number of orders: " ++ (getordercount jvalue))
+         --H.p $ toMarkup ("loaded orders: " ++ (getallorders jvalue))
+         H.p $ toMarkup ("all McCoy types: " ++ (getallMcCoy jvalue))
+         H.p $ toMarkup ("prices of sku 1038 : " ++ (getpriceof1038 jvalue))
+         H.p $ toMarkup ("price of large Chekov: " ++ (getlargeChekov jvalue))
+         H.p $ toMarkup ("sizes of all chekov: " ++ (getChekovsizes jvalue))
          buttons "/products" "display all products"
          buttons "/offers" "display all offers"
          buttons "/orders" "display all orders"
