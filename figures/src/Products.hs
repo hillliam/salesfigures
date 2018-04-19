@@ -51,12 +51,9 @@ getskucount = do
       putStrLn (show (sum (skucounts (output:: JValue))))
 
 skucounts :: JValue -> [Int]
-skucounts (JArray item) = map skucount item
-
-skucount :: JValue -> Int
-skucount (JObject item) = do
-    let sub = item !! 3
-    getcount (snd sub)
+skucounts (JArray item) = do
+    let result = map (getvalue "variants") item
+    map getcount result
 
 --getpricedata :: IO () -> [Product]
 --getpricedata = do
@@ -75,22 +72,22 @@ getallmcoy :: IO ()
 getallmcoy = do
       input <- readFile "products.json"
       let output = read input
-      putStrLn (show (unlines (findmcoys (output:: JValue))))
+      putStrLn (show (cleanup (unlines (findmcoys (output:: JValue)))))
 
 findmcoys :: JValue -> [String]
-findmcoys (JArray item) = map findmcoy item --map findbyname (item "McCoy")
+findmcoys (JArray item) = map (findbyname "McCoy") item
 
 findmcoy :: JValue -> String
-findmcoy (JObject item) = do
-    let name = snd (item !! 1)
+findmcoy jvalue@(JObject item) = do
+    let name = getvalue "name" jvalue
     if isInfixOf "McCoy" (show name) then
         show [item]
     else
         "" --show name++ " a "
 
-findbyname :: JValue -> String -> String
-findbyname (JObject item) key = do
-    let name = snd (item !! 1)
+findbyname :: String -> JValue -> String
+findbyname key jvalue@(JObject item) = do
+    let name = getvalue "name" jvalue
     if isInfixOf key (show name) then
         show [item]
     else
@@ -100,18 +97,16 @@ get1038 :: IO ()
 get1038 = do
       input <- readFile "products.json"
       let output = read input
-      putStrLn (show (unlines (find1038s (output:: JValue))))
+      putStrLn (show (cleanup (unlines (find1038s (output:: JValue)))))
 
 find1038s :: JValue -> [String]
 find1038s (JArray item) = map find1038 item
 
 find1038 :: JValue -> String
-find1038 (JObject item) = do
-    let variation = snd (item !! 3)
-    unlines (getskubyvindex variation 2 "1038" show)
+find1038 jvalue@(JObject item) = do
+    let variation = getvalue "variants" jvalue
+    unlines (getskubyvindex variation "sku" "1038" showprices)
     --show value
-
-
 
 --get1038sku :: JValue -> [String]
 --get1038sku (JObject item) = getskubykey (JValue item) "1038"
@@ -121,7 +116,7 @@ find1038 (JObject item) = do
 
 -- the version that should be used.
 --getskubyvindex :: JValue => a -> Int -> String -> [String]
-getskubyvindex (JObject item) index key f = [ if isInfixOf key (show (getvalue v index)) then f v else "" | (k, v) <- item]
+getskubyvindex (JObject item) name key f = [ if isInfixOf key (show (getvalue name v)) then f v else "" | (k, v) <- item]
 
 --getskubyprice :: JValue -> String -> [String]
 --getskubyprice (JObject item) key = [ if isInfixOf key (show (getvalue v 0)) then show v else "" | (k, v) <- item]
@@ -134,18 +129,18 @@ getlChekov :: IO ()
 getlChekov = do
       input <- readFile "products.json"
       let output = read input
-      putStrLn (show (unlines (findlchekovs (output:: JValue))))
+      putStrLn (show (cleanup (unlines (findlchekovs (output:: JValue)))))
 
 findlchekovs :: JValue -> [String]
 findlchekovs (JArray item) = map findchekovl item
 
 -- this can be made more generic
 findchekovl :: JValue -> String
-findchekovl (JObject item) = do
-    let name = snd (item !! 1)
+findchekovl jvalue@(JObject item) = do
+    let name = getvalue "name" jvalue
     if isInfixOf "Chekov" (show name) then do
-        let variation = snd (item !! 3)
-        unlines (getskubyvindex variation 1 "L" showprices)
+        let variation = getvalue "variants" jvalue
+        unlines (getskubyvindex variation "options" "L" showprices)
     else
         "" --show name++ " a "
 
@@ -153,25 +148,27 @@ getsChekov :: IO ()
 getsChekov = do
       input <- readFile "products.json"
       let output = read input
-      putStrLn (show (unlines (findschekovs (output:: JValue))))
+      putStrLn (show (cleanup (unlines (findschekovs (output:: JValue)))))
 
 findschekovs :: JValue -> [String]
 findschekovs (JArray item) = map findchekovs item
 
 findchekovs :: JValue -> String
-findchekovs (JObject item) = do
-    let name = snd (item !! 1)
+findchekovs jvalue@(JObject item) = do
+    let name = getvalue "name" jvalue
     if isInfixOf "Chekov" (show name) then do
-        let variation = snd (item !! 3)
-        unlines (getskubyvindex variation 1 "" showsizes)
+        let variation = getvalue "variants" jvalue
+        unlines (getskubyvindex variation "options" "" showsizes)
     else
         "" --show name++ " a "
 
+--showes the prices of the current sku.
 showprices :: JValue -> String
-showprices (JObject item) = show (head item)
+showprices jvalue@(JObject item) = show (head item)
 
+-- shows the sizes of the current sku.
 showsizes :: JValue -> String
-showsizes (JObject item) = show (item !! 1)
+showsizes jvalue@(JObject item) = show (getvalue "size" (getvalue "options" jvalue))
 
 loadproducts :: JValue -> [String]
 loadproducts (JArray item) = map loadproduct item
@@ -181,48 +178,42 @@ loadproduct (JObject item) = do
   let value = [ if k == "name" then v else "" | (k, JString v) <- item]
   show value
 
--- returns true if the current object has key name variation
-isvariation :: JValue -> Bool
-isvariation (JObject item) = fst (last item) == "variation"
+--toproducts :: JValue -> [Product]
+--toproducts (JArray item) = map toproduct item
 
-toproducts :: JValue -> [Product]
-toproducts (JArray item) = map toproduct item
-
+showproducts :: JValue -> String
+showproducts jvalue@(JObject item) = (getguid jvalue) ++ (getname jvalue)
+-- gets the current guid
 getguid :: JValue -> String
-getguid (JObject item) = do
-    let guid = head item
-    show (snd guid)
+getguid jvalue@(JObject item) = show (getvalue "id" jvalue)
 
+-- gets the name of the product
 getname :: JValue -> String
-getname (JObject item) = do
-    let guid = item !! 1
-    show (snd guid)
+getname jvalue@(JObject item) = show (getvalue "name" jvalue)
 
+-- product description
 getdescription :: JValue -> String
-getdescription (JObject item) = do
-    let guid = item !! 2
-    show (snd guid)
+getdescription jvalue@(JObject item) = show (getvalue "description" jvalue)
 
+-- the sku of
 getsku :: JValue -> String
-getsku (JObject item) = do
-    let guid = item !! 2
-    show (snd guid)
+getsku jvalue@(JObject item) = show (getvalue "sku" jvalue)
 --
 --getarrayinvariation :: JValue -> [Product]
 --getarrayinvariation (JObject item) = if isvariation item then map toproduct (snd (head item)) else []
 
-toproduct :: JValue -> Product
-toproduct (JObject item) = do
-  let guid = snd (head item)
-  let name = snd (item !! 1)
-  let description = snd (item !! 2)
-  --let sku = [ k | (k, v) <- item]
-  --let rest = [ v | (k, v) <- item]
-  let sub = item !! 3
-  let sku = sub
-  let prices = getprices (snd sub)--(snd (item !! 3))
-  --print getcount item
-  Product (show name) prices
+--toproduct :: JValue -> Product
+--toproduct jvalue@(JObject item) = do
+--  let guid = getguid
+--  let name = getname
+--  let description = getdescription
+--  --let sku = [ k | (k, v) <- item]
+--  --let rest = [ v | (k, v) <- item]
+--  let sub = getvalue "variants" jvalue
+--  let sku = getsku sub
+--  let prices = getprices sub --(snd (item !! 3))
+--  --print getcount item
+--  Product (show name) prices
 
 getprices :: JValue -> [Price]
 getprices (JArray item) = map getprice item
