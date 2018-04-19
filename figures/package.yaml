@@ -20,9 +20,10 @@ synopsis:            application to display figures from collected data
 description:         Please see the README on Github at <https://github.com/hillliam/salesfigures#readme>
 
 dependencies:
-- HDBC              # a better database framework
+- sqlite-simple     # the database framework i have chosen to use
+#- HDBC              # a better database framework
 #- HDBC-sqlite3      # for sqlite support
-- persistent-sqlite # for in memory database
+#- persistent-sqlite # for in memory database
 #- esqueleto         # for easy table declaration
 - pathwalk          # for handaling the full data
 - blaze-html        # for generating html
@@ -30,6 +31,7 @@ dependencies:
 #- plugins          # for executing haskell at runtime
 - mtl
 - text
+- time
 - hashmap           # optimized map if used
 - lens >= 4.15      # easier object handaling
 - base >= 4.7
