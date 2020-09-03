@@ -1,0 +1,32 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Cache@2
+  inputs:
+    key: '.stack'
+    path: '$HOME/.stack'
+
+- script: |
+    mkdir -p ~/.local/bin
+    export PATH=$HOME/.local/bin:$PATH
+    curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+    cd figures
+  displayName: 'download stack'
+
+- script: stack --no-terminal --install-ghc test --only-dependencies
+  displayName: 'install dependencies'
+
+- script: stack --no-terminal test --haddock --no-haddock-deps
+  displayName: 'run tests'
+
+- script: curl -sL https://raw.github.com/ndmitchell/hlint/master/misc/travis.sh | sh -s .
+  displayName: 'lint'
