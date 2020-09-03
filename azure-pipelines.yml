@@ -10,10 +10,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: Cache@2
-  inputs:
-    key: '.stack'
-    path: '$HOME/.stack'
 
 - script: |
     mkdir -p ~/.local/bin
