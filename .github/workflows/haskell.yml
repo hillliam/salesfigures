@@ -21,6 +21,9 @@ jobs:
     - name: Setup Stack
       uses: mstksg/setup-stack@v2
 
+    - name: stack init
+      run: stack init
+      
     - name: install
       run: stack --no-terminal --install-ghc test --only-dependencies
       
